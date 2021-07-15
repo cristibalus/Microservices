@@ -47,3 +47,19 @@ Every developer should have a somewhat basic knowledge in every matter described
 Let's say you figured out the first two points. You have capable enough teams to be self-sufficient, you are able to implement tests, messaging, to have pipelines up and running but... where are they going to run? While microservices offer good scalability and high availability, this comes with the cost of complexity across the board. Your infrastructure has to facilitate that scalability. 
 
 Even though this topic might also go down to continuous integration/ops/containers points, at NetRom it has to be a separate discussion. This is because we're not alone, we're working with clients. Of course, there is the classic question: do we have the knowledge to implement this? But there comes an additional question: Who is responsible for creating and maintaining the infrastructure? Most of the times, this is handled by our clients, since they all probably want to be able to continue their activity in the unfortunate event of our collaboration ending. Nevertheless, this comes with an overhead, as our teams might become dependent on the client's availability, in case they want to perform some actions they are not authorized to.
+
+## Considerations for starting fresh
+
+...
+
+## Breaking up the monolith
+
+...
+
+## Microservices alternatives
+
+...
+
+## Architecture examples
+
+...
