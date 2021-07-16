@@ -50,7 +50,39 @@ Even though this topic might also go down to continuous integration/ops/containe
 
 ## Considerations for starting fresh
 
-...
+When considering moving from monolithic architecture to microservices architecture we must first ask ourselves a few questions:
+
+1. Do our current project timelines allow it?
+2. Is our current team able to handle the workload?
+3. Does our current monolith suffer form overly-tight coupling?
+4. Has our monolith become harder to understand and maintain?
+If the answer to all of the above questions is **YES** then we can certainly consider the transition. 
+
+By switching to microservices we will be able to have better organization due to each microservice having a very specific job which would not affect other components. Furthermore this will also have a decoupling effect on the services by increasing their reusability, allowing partial deployments and thus increasing the overall performance.
+
+Before starting, it is critical that everyone has a common understanding of a microservices ecosystem: 
+*	Microservices ecosystem is a platform of services each encapsulating a business capability. 
+*	A business capability represents what a business does in a particular domain to fulfill its objectives and responsibilities. 
+*	Each microservice exposes an API that developers can discover and use in a self-serve manner. 
+*	Microservices have independent lifecycle. 
+*	Developers can build, test and release each microservice independently. 
+*	The microservices ecosystem enforces an organizational structure of autonomous long standing teams, each responsible for one or multiple services. 
+*	Contrary to general perception and ‘micro’ in microservices, the size of each service matters least and may vary depending on the operational maturity of the organization.
+
+In order to be successful with this approach, don't promise too much all at once. Engage with business stakeholders because microservices might require new hardware, software, IT tools and people. Effective microservices development and deployment demand cross-functional teams that collaborate freely and implement a strong CI/CD pipeline.
+
+A CI/CD pipeline is a series of steps that must be performed in order to deliver a new version of software. Continuous integration/continuous delivery (CI/CD) pipelines are a practice focused on improving software delivery using either a DevOps or site reliability engineering (SRE) approach.
+
+A CI/CD pipeline introduces monitoring and automation to improve the process of application development, particularly at the integration and testing phases, as well as during delivery and deployment. Although it is possible to manually execute each of the steps of a CI/CD pipeline, the true value of CI/CD pipelines is realized through automation.
+
+The steps that form a CI/CD pipeline are distinct subsets of tasks grouped into what is known as a pipeline stage. Typical pipeline stages include:
+
+*	**Build** - The stage where the application is compiled.
+*	**Test** - The stage where code is tested. Automation here can save both time and effort.
+*	**Release** - The stage where the application is delivered to the repository.
+*	**Deploy** - In this stage code is deployed to production.
+*	**Validation and compliance** - The steps to validate a build are determined by the needs of your organization.
+
 
 ## Breaking up the monolith
 
