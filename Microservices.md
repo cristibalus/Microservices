@@ -4,15 +4,19 @@
 
 ## Can we successfully implement and maintain a microservices architecture?
 
-After deciding that microservices might be a viable solution for a project, one needs to assert that the endeavor is not set for failure before it even gets started. At NetRom, we are working in a specific environment which, most of the times, implies very different scenarios from regular companies which are using microservices. For example, one difference would be that, apart from our internal apps, we don't have our own products, we aren't the only ones responsible for the teams formation and we probably can't just enforce specific processes to our clients. Fortunately, such peculiarities of NetRom's activity and processes can be used in relationship with disadvantages of microservices to form some kind of a "checklist", in order to take informed decisions, which are specific to our company. This way you can maybe rule out projects which just aren't appropriate for microservices or at least identify critical attention points, so that you know what you are going to deal with beforehand. Here is a proposal of what a non-exhaustive microservices checklist might look like:
+After deciding that microservices might be a viable solution for a project, one needs to assert that the endeavor is not set for failure before it even gets started. At NetRom, we are working in a specific environment which, most of the times, implies very different scenarios from regular companies which are using microservices. For example, one difference would be that, apart from our internal apps, we don't have our own products, we aren't the only ones responsible for the teams formation and we probably can't just enforce futuristic processes to our clients. 
+
+This section analyses such peculiarities of NetRom's activity and processes in relationship with disadvantages of microservices to form some kind of a "checklist", to help with deciding whether it's possible to implement microservices in a specific situation. This way you can maybe rule out projects which just aren't appropriate for microservices or at least identify critical attention points, so that you know what you are going to deal with beforehand. Here is a proposal of what a non-exhaustive microservices checklist might look like:
 
 ### 1. Does our team structure allow microservices development?
 
-When implementing microservices, two of the most important matters are **low coupling** and **high cohesion**. This might sound simple. We just have to be careful to have functionalities implemented into separate services, define domains, avoid chatty communication and we'll be fine. Well, it doesn't really sound simple per se, but at least it's doable, right?. In NetRom's case however, it is more complicated than this. Reaching low coupling and high cohesion between components takes more than just technical solutions and, unfortunately, there is a law which may stand tall between NetRom and those two, indispensable targets. That's just because of how we're working with our clients:
+When implementing microservices, two of the most important matters are **low coupling** and **high cohesion**. This might sound simple. We just have to be careful to have functionalities implemented into separate services, define domains, avoid chatty communication and we'll be fine. Well, it doesn't really sound simple per se, but at least it's doable, right?. In NetRom's case however, things are a little more complicated. Achieving low coupling and high cohesion between components takes more than just technical solutions and, unfortunately, there is a law which may stand tall between NetRom and those two, indispensable targets. That's just because of how we're working with our clients:
 
 > Any organization that designs a system will inevitably produce a design whose structure is a copy of the organization's communication structure.
 >
-> ​																																			**Conway's law**
+> ```
+> 																																		**Conway's law**
+> ```
 
 Conway's law basically says that if your company structure relies on highly coupled communication between different departments, your actual system's components, which are implementing those department's processes, will be coupled together. As stated before, we don't have ownership over team formation. Sometimes we just have only one team taking care of the whole project, which tightly communicates with a product owner and maybe another dev team from our clients. In case of microservices, one can say from the beginning that this scenario is set for failure. You just can't have 10, maybe 20 microservices implemented by the same two teams. They will end up performing chatty communication and just being tightly coupled together overall. Of course, microservices architectures worked just fine for companies like Netflix, Amazon and so on, but even those giants had to make important structural changes in their organization in order to accommodate microservices.
 
@@ -22,17 +26,15 @@ Firstly, we do have a few projects which consist of multiple (3, 4 or even 5), s
 
 Secondly, the decision might not be a straight "NO" for smaller setups. Maybe the MVP for the client's needs is not that complex and can be handled by only one or two teams initially. Once the project becomes bigger, more teams can join in to implement other needed components, which is perfectly fine. Moreover, there is one variation of Conway's law, which probably maps better to our situation. It states that:
 
->  A system will perform better if it closely matches its organization's communication structure.
+> A system will perform better if it closely matches its organization's communication structure.
 
-In this variation, "better" not only refers to the efficiency of the system itself, but also to a better productivity of all the people involved in implementing the services. This would mean that if you had a way to keep the productivity up and pay closer attention to microservices pitfalls, you could actually make it work. It wouldn't be as efficient as doing it "by the book", but in case microservices are **really** needed, you have an acceptable way to do it.
-
-This variation also goes the other way around and was actually the case at one of our projects. Even at NetRom we used to have a project with 4 teams on our side which were working on a big, monolithic solution. This was leading to a loss of efficiency in communication and lots of frustrations because lots of teams were working on the same, huge codebase. The decision in the end was the adoption of a microservices architecture, by splitting up the monolith into microservices step by step.
+In this variation, "better" not only refers to the efficiency of the system itself, but also to a better productivity of all the people involved in implementing the services. This would mean that if you had a way to keep the productivity up and pay closer attention to microservices pitfalls, you could actually make it work. It wouldn't be as efficient as doing it "by the book", but in case microservices are **really** needed, you have an acceptable way to do it. One other way to accommodate microservices would be to start with a monolith and transition to microservices later on, when the need for them rises. This is actually the preferred approach at the moment, but this topic will be addressed in the next chapter.
 
 ### 2.  Do we have the needed knowledge?
 
-We've seen which are the team's requirements at a macro level. Now, what about micro level? Let's say we're in the easiest scenario, having 4 or 5 teams working on separate services. As we said, the teams should be self sufficient i.e. every team should be competent enough to achieve their goals without help from anyone outside the team. This will improve high cohesion and low coupling eventually. However, there are quite a few aspects related to microservices that team members must be proficient in. This translates in it being very hard to find the right people in order to fulfill the needs of a self-sufficient team. Those are some of the aspects you need to pay attention to when assessing team's capabilities:
+We've seen which are the team's requirements at a macro level. Now, what about micro level? Let's say we're in the easiest scenario, having 4 or 5 teams working on separate services. As we said, the teams should be self sufficient i.e. every team should be competent enough to achieve their goals without help from anyone outside the team. This will improve high cohesion and low coupling eventually. However, there are quite a few aspects related to microservices that team members must be proficient in. This means it's going to be very hard to find the right people in order to fulfill the needs of a self-sufficient team. Those are some of the aspects you need to pay attention to when assessing team's capabilities:
 
-- **Are our teams capable of identifying domains and splitting responsibilities between them**? Your organization should be able to separate functionalities in services and decied which functionality goes in which service. When poorly designed, this can easily mess up the entire system, so you need a lot of knowledge and context in order to be able to do it correctly. Maybe there is one person on our team, or our client's team who has a broad overview of all the functional scenarios - an architect, for example. They would be a good candidate for solving this issue, as they can understand and take decisions about which functionalities go into which service. However, this is a double-edged sword, as this person might become a big dependency between all the teams. It's important to learn, in time, how to make use of that person's knowledge without being dependent on them.
+- **Are our teams capable of identifying domains and splitting responsibilities between them**? Your organization should be able to separate functionalities in services and decide which functionality goes in which service. When poorly designed, this can easily mess up the entire system, so you need a lot of knowledge and context in order to be able to do it correctly. Maybe there is one person on our team, or our client's team who has a broad overview of all the functional scenarios - an architect, for example. They would be a good candidate for solving this issue. However, this is a double-edged sword, as this person might become a big dependency between all the teams. It's important to learn, in time, how to make use of that person's knowledge without being dependent on them.
 - **Do we have the knowledge to work with containers?** While other matters may be 1% questionable, there is no space for questions about this one. For microservices you HAVE TO work with containers. Skipping this would defeat the whole purpose of having self-deployable, scalable services. You have to assess whether there are people in the team who are familiar with containers, Docker, Kubernetes etc. and accommodate trainings where needed. 
 - **Messaging.** Services usually also expose REST APIs, but it is preferred - because of reasons which will not be addressed in the scope of this article - that the communication is performed through some message bus. This means all your developers must at least have some basic knowledge about what queues are or about sending messages.
 - **Testing.**  One microservice should handle the failure of other services, so that they can work and be deployed independently. This behavior can be tested by breaking the circuit between some of the services. Have any people in my team ever done that? Have they ever written unit tests (you'd be surprised how often those are just skipped)? Does anybody have any knowledge about end to end automated tests?
@@ -46,45 +48,52 @@ Let's say you figured out the first two points. You have capable enough teams to
 
 Even though this topic might also go down to continuous integration/ops/containers points, at NetRom it has to be a separate discussion. This is because we're not alone, we're working with clients. Of course, there is the classic question: do we have the knowledge to implement this? But there comes an additional question: Who is responsible for creating and maintaining the infrastructure? Most of the times, this is handled by our clients, since they all probably want to be able to continue their activity in the unfortunate event of our collaboration ending. Nevertheless, this comes with an overhead, as our teams might become dependent on the client's availability, in case they want to perform some actions they are not authorized to.
 
-## Considerations for starting fresh
+## Starting with microservices vs. monolith-first approach
 
-When considering moving from monolithic architecture to microservices architecture we must first ask ourselves a few questions:
+So, following the previous chapters you decided that a.: advantages which microservices offer are worth dealing with the overhead they come with and b: you may actually be capable of implementing this kind of architecture. Now it's time to decide how to go about it. One may ask: what's there to decide? Why are we still talking about monoliths if the decision was to go with microservices? This question can be answered by looking at stories of other companies. The facts there are that many of those who successfully implemented microservices started with a monolith that got too big and had to be broken up. At the same time, the rate of success for the ones which started implementing microservices from scratch is very low, but we don't hear about them because... well... they were unsuccessful. 
+
+However, microservices architecture is still young and it would be reckless to take decisions only based on the very few experiences some guys wrote about in their articles. If you go with microservices, you're going to have to think for yourself, as there is no definite rule of thumb for anything and community support is very low or questionable. BUT, we already have some considerations about starting straight with microservices vs. monolith-first approach though. Based on those past experiences we can decide for ourselves.
+
+### The monolith-first approach 
+
+The general consensus in the community is that, even if a company knows its project is going to get big enough to require microservices at some point, they should start with a monolith until they are really needed. This makes perfect sense, it's basic YAGNI principle. You don't build separate pipelines, processes, codebases and so on for multiple services until the complexity of the system actually requires it.
+
+We also discussed in previous chapters about how domain definition is one of the toughest challenges while implementing microservices. This is one of the most painful issues the monolith-first approach is trying to solve. Maybe you don't always have overview of all system's domains in the beginning, or the team doesn't have enough experience to identify them. Then, a monolith-first approach would give you time to learn about the system and prepare for microservices and identifying domains. This would also be a good way to start if you have a very small team, since it would be a pain to maintain separate deployment for multiple services with only 3 or 4 people.
+
+Please bear in mind that, with this approach, the end goal is still implementing microservices, so you're going to have to make all the implementations accordingly. This is one of the downsides of implementing monolith-first, because it forces you to spend extra time to build a monolith which you make sure is "microservice-able" at any point, or take the risk of building it faster and not being able to break it into microservices when you need to, because it's too tightly coupled.
+
+### Straight microservices
+
+Implementing microservices from the beginning is essentially the opposite as far as advantages and disadvantages go. In the beginning, you'll add a lot of overhead, as you will have to add complexity in infrastructure, team organization, processes etc. However, you will be spared from living with a constant spike in your back, knowing that you will not have to make a transition from monolith to microservices anytime. You can't know and can't communicate to your client what such a transition would mean and when it's going to be done, because this is going to be figured out along the way in a monolith-first approach. So skipping the monolith part would make things easier with our clients.
+
+Therefore, in a way, even if it seems this approach comes with an overhead, this overhead is most of the times only related to technical aspects, which can easily be overcome. Implementing microservices from the beginning would be preferable in a scenario where the client desires to start with multiple units immediately. Another way in which this would work would be to start implementing just a few services with a small team and, as the project grows, the team should expand as well. But this would also require a promise from the client's side to expand the team, as extending the project with more microservices and a small team would turn into a disaster.
+
+### Breaking up the monolith
+
+Even if you started with microservices in mind from the beginning or just inherited a big codebase, you might find yourself in the position of having to split up a monolith into separate services. The way to go in this case is to identify small seams which can be broken apart from the monolith with the least possible effort, and deploy them as microservices one by one.
+
+When considering moving from a monolithic architecture to microservices one must first find answers [together with the client] for a few questions:
 
 1. Do our current project timelines allow it?
 2. Is our current team able to handle the workload?
-3. Does our current monolith suffer form overly-tight coupling?
+3. Does our current monolith suffer from overly-tight coupling?
 4. Has our monolith become harder to understand and maintain?
-If the answer to all of the above questions is **YES** then we can certainly consider the transition. 
+5. Have we arrived in a point in which we have too many people working on a single, monolithic application?
 
-By switching to microservices we will be able to have better organization due to each microservice having a very specific job which would not affect other components. Furthermore this will also have a decoupling effect on the services by increasing their reusability, allowing partial deployments and thus increasing the overall performance.
+If the answer to all of the above questions is **YES** the time has come to consider the transition. However, especially if the monolith wasn't developed with microservices in mind, while answering those questions you might find out that your system is so tightly coupled, that you can't even break it into small services. This is why it's important to answer those questions in the first place. There's no harm done. If you and the client still really want to go for microservices, you can even wipe the entire solution and start from scratch, but there are few stories about people who did that successfully and probably even fewer clients which would agree to this approach.
 
-Before starting, it is critical that everyone has a common understanding of a microservices ecosystem: 
-*	Microservices ecosystem is a platform of services each encapsulating a business capability. 
-*	A business capability represents what a business does in a particular domain to fulfill its objectives and responsibilities. 
-*	Each microservice exposes an API that developers can discover and use in a self-serve manner. 
-*	Microservices have independent lifecycle. 
-*	Developers can build, test and release each microservice independently. 
-*	The microservices ecosystem enforces an organizational structure of autonomous long standing teams, each responsible for one or multiple services. 
-*	Contrary to general perception and ‘micro’ in microservices, the size of each service matters least and may vary depending on the operational maturity of the organization.
+In order to be successful with any approach, don't promise too much all at once and be careful that your client understands every step of the process. Microservices architecture is still new and some clients might just want to join the hype, without realizing what it implies. You might manage to convince them to go with it without them understanding what microservices mean. This is bad, because when every architecture-specific downside happens (and they're going to happen), you'll be to blame and they will start considering microservices just some kind of a technical caprice.
 
-In order to be successful with this approach, don't promise too much all at once. Engage with business stakeholders because microservices might require new hardware, software, IT tools and people. Effective microservices development and deployment demand cross-functional teams that collaborate freely and implement a strong CI/CD pipeline.
+Therefore, at any point you are in your endeavor to implement microservices, try to engage with business stakeholders to make them understand some concepts - at a high level at least - and participate in taking decisions about:
 
-A CI/CD pipeline is a series of steps that must be performed in order to deliver a new version of software. Continuous integration/continuous delivery (CI/CD) pipelines are a practice focused on improving software delivery using either a DevOps or site reliability engineering (SRE) approach.
-
-A CI/CD pipeline introduces monitoring and automation to improve the process of application development, particularly at the integration and testing phases, as well as during delivery and deployment. Although it is possible to manually execute each of the steps of a CI/CD pipeline, the true value of CI/CD pipelines is realized through automation.
-
-The steps that form a CI/CD pipeline are distinct subsets of tasks grouped into what is known as a pipeline stage. Typical pipeline stages include:
-
-*	**Build** - The stage where the application is compiled.
-*	**Test** - The stage where code is tested. Automation here can save both time and effort.
-*	**Release** - The stage where the application is delivered to the repository.
-*	**Deploy** - In this stage code is deployed to production.
-*	**Validation and compliance** - The steps to validate a build are determined by the needs of your organization.
-
-
-## Breaking up the monolith
-
-...
+- Hardware, software, trainings, IT tools and people requirements for microservices
+- The need for cross-functional teams that collaborate freely
+- A microservices ecosystem is a platform of services each encapsulating a business capability. 
+- A business capability represents what a business does in a particular domain to fulfill its objectives and responsibilities. 
+- Microservices have independent lifecycles. 
+- Developers must be able to build, test and release each microservice independently. 
+- The microservices ecosystem enforces an organizational structure of autonomous long standing teams, each responsible for one or multiple services. 
+- Contrary to general perception and ‘micro’ in microservices, the size of each service matters least and may vary depending on the operational maturity of the organization.
 
 ## Microservices alternatives
 
